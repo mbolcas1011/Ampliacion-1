@@ -4,6 +4,13 @@ function final () {
     basic.pause(500)
     basic.clearScreen()
 }
+input.onButtonPressed(Button.A, function () {
+    if (juega && cesta > 0) {
+        led.unplot(cesta, 4)
+        cesta = cesta - 1
+        led.plot(cesta, 4)
+    }
+})
 function inicio () {
     basic.showNumber(3)
     basic.showNumber(2)
@@ -21,6 +28,13 @@ input.onButtonPressed(Button.AB, function () {
     juega = false
     final()
 })
+input.onButtonPressed(Button.B, function () {
+    if (juega && cesta < 4) {
+        led.unplot(cesta, 4)
+        cesta = cesta + 1
+        led.plot(cesta, 4)
+    }
+})
 function manzana () {
     x = randint(0, 4)
     y = 0
@@ -29,7 +43,11 @@ function manzana () {
         basic.pause(espera)
         if (juega) {
             led.unplot(x, y)
+            y = y + 1
         }
+    }
+    if (juega) {
+        led.plot(cesta, 4)
     }
 }
 let y = 0
